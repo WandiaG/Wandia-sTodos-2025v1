@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     setDateToToday(); // Set the date input to today
 
-    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (storedTasks) {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    if (storedTasks.length) {
         storedTasks.forEach((task) => tasks.push(task));
         updateTaskList();
         updateStats();
