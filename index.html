@@ -13,12 +13,15 @@
   <h1 class="text-3xl font-bold text-[var(--pink-color)]">
     Wandia's Todo 2025 
   </h1>
-  <div class="divide-y divide-[var(--pink-color)] w-[fit] bg-[var(--primary-color)] p-4 rounded-lg flex items-center justify-center gap-5 flex-col">
-    <div class="flex items-center justify-between gap-3">
+  <div class="container divide-y divide-[var(--pink-color)] w-[fit] bg-[var(--primary-color)] p-4 rounded-lg flex items-center justify-center gap-5 flex-col">
+    <h1></h1>
+    <div class="container grid-cols-responsive grid items-center justify-items-center gap-3">
       <div class="p-2  border-2 border-[var(--secondary-color)] flex items-center justify-center flex-col">
         <div class="flex items-center justify-center gap-2">
           <div class="flex items-center justify-center flex-col">
+            <input class=" bg-[var(--seconday-color)] text-[var(--text-color)] rounded-xl text-xl" type="date" name="date" id="date-time">
             <h1 class="text-2xl font-bold text-[var(--pink-color)]">
+              
               Tasks Done
             </h1>
             <p class="text-lg ">
@@ -36,11 +39,16 @@
           </div>
       
       </div>
+      <div class="flex items-center justify-between gap-2 text-[--secondary-color] font-serif text-sm flex-col">
+        <h1 class="font-bold">GOALs</h1> 
+        <p>Becoming Health and confident </p>
+        <p> make websites and teach codding</p> 
+        <p>Growing The online business</p>  
+            
+        </div>
+      
       <div class="flex items-center justify-center gap-2 flex-col">
-        <div class="flex items-center justify-between gap-2">
-              <input class=" bg-[var(--seconday-color)] text-[var(--text-color)] rounded-xl text-xl" type="date" name="date" id="date-time">
-              <button class="px-2 py-2 rounded-xl bg-[var(--pink-color)] tracking-tight" type="submit">Search-Task</button>
-          </div>
+        
           <div class="flex items-center justify-between gap-2">
               <input class="border bg-[var(--seconday-color)] rounded-lg p-2 caret-[var(--pink-color)]" placeholder="Please Type a New Task" type="text" name="" id="task-input" autocomplete="off">
               <button id="add-task" class="rounded-lg p-2 tracking-tight bg-[var(--pink-color)]">Add Task</button>
@@ -49,7 +57,7 @@
       
     </div>  
       
-    <ul id="task-UL">
+    <ul id="task-UL" class="overflow-x-scroll">
       <!-- List items will be appended here by JavaScript -->
     </ul>
     <div class="flex items-center justify-center gap-2">
