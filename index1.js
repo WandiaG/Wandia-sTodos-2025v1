@@ -73,10 +73,10 @@ function updateStats() {
 }
 
 function addATask() {
-    const currentDate = new Date().toLocaleDateString();
+    const currentDate = new Date().toISOString().split('T')[0];
     const inputTask = document.getElementById("task-input");
     const task = inputTask.value;
-    
+
     if (task.length > 0) {
         tasks.push({ text: task, complete: false, date: currentDate });
     }
@@ -86,13 +86,17 @@ function addATask() {
     saveTask();
 }
 
+
 function updateTaskList() {
     const taskslist = document.getElementById("task-UL");
     taskslist.innerHTML = "";
 
     const selectedDate = document.getElementById("date-time").value;
     const filteredTasks = selectedDate 
-        ? tasks.filter(task => new Date(task.date).toISOString().split('T')[0] === selectedDate) 
+        ? tasks.filter(task => {
+            const taskDate = new Date(task.date);
+            return !isNaN(taskDate) && taskDate.toISOString().split('T')[0] === selectedDate;
+        }) 
         : tasks;
 
     const start = (currentPage - 1) * tasksPerPage;
@@ -128,6 +132,7 @@ function updateTaskList() {
         taskslist.append(taskItem);
     });
 }
+
 
 function prevPage() {
     if (currentPage > 1) {
