@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("next-page").addEventListener("click", nextPage);
 });
 
+
 let currentPage = 1;
 const tasksPerPage = 5;
 
