@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("next-page").addEventListener("click", nextPage);
 });
 
-
 let currentPage = 1;
 const tasksPerPage = 5;
 
@@ -49,7 +48,11 @@ function deleteTask(index) {
 
 function editTask(index) {
     const taskInput = document.getElementById("task-input");
+    const dateInput = document.getElementById("date-time");
+
     taskInput.value = tasks[index].text;
+    dateInput.value = tasks[index].date; // Set date input to task's date
+
     tasks.splice(index, 1);
     updateTaskList();
     updateStats();
@@ -73,19 +76,19 @@ function updateStats() {
 }
 
 function addATask() {
-    const currentDate = new Date().toISOString().split('T')[0];
     const inputTask = document.getElementById("task-input");
+    const dateInput = document.getElementById("date-time");
     const task = inputTask.value;
+    const taskDate = dateInput.value;
 
     if (task.length > 0) {
-        tasks.push({ text: task, complete: false, date: currentDate });
+        tasks.push({ text: task, complete: false, date: taskDate });
     }
     inputTask.value = "";
     updateTaskList();
     updateStats();
     saveTask();
 }
-
 
 function updateTaskList() {
     const taskslist = document.getElementById("task-UL");
@@ -132,7 +135,6 @@ function updateTaskList() {
         taskslist.append(taskItem);
     });
 }
-
 
 function prevPage() {
     if (currentPage > 1) {
