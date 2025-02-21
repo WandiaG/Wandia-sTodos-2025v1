@@ -40,7 +40,15 @@ addNewTask.addEventListener("click", (e) => {
 });
 
 function deleteTask(index) {
-    tasks.splice(index, 1);
+    const selectedDate = document.getElementById("date-time").value;
+    const filteredTasks = selectedDate
+        ? tasks.filter(task => new Date(task.date).toISOString().split('T')[0] === selectedDate)
+        : tasks;
+
+    const start = (currentPage - 1) * tasksPerPage;
+    const actualIndex = tasks.indexOf(filteredTasks[index]); // Find the real index
+
+    tasks.splice(actualIndex, 1);
     updateTaskList();
     updateStats();
     saveTask();
@@ -50,10 +58,18 @@ function editTask(index) {
     const taskInput = document.getElementById("task-input");
     const dateInput = document.getElementById("date-time");
 
-    taskInput.value = tasks[index].text;
-    dateInput.value = tasks[index].date; // Set date input to task's date
+    const selectedDate = document.getElementById("date-time").value;
+    const filteredTasks = selectedDate
+        ? tasks.filter(task => new Date(task.date).toISOString().split('T')[0] === selectedDate)
+        : tasks;
 
-    tasks.splice(index, 1);
+    const start = (currentPage - 1) * tasksPerPage;
+    const actualIndex = tasks.indexOf(filteredTasks[index]); // Find the real index
+
+    taskInput.value = tasks[actualIndex].text;
+    dateInput.value = tasks[actualIndex].date;
+
+    tasks.splice(actualIndex, 1); // Remove from the original array
     updateTaskList();
     updateStats();
     saveTask();
@@ -114,8 +130,7 @@ function updateTaskList() {
             <label class="flex flex-grow items-center justify-left peer-checked:line-through peer-checked:text-green-500" for="checkbox-item-${start + index}">${task.text}</label>
             <label for="date">${task.date}</label>
             <div class="flex items-center justify-center flex-col">
-                <button onclick="editTask(${start + index})"> <i class="fa-solid fa-pen text-green-500"></i> </button>
-                <button onclick="deleteTask(${start + index})"> <i class="fa-solid fa-trash-can text-[var(--pink-color)]"></i> </button>
+                <button onclick="editTask(${index})"> <i class="fa-solid fa-pen text-green-500"></i> </button>  </button> <button onclick="deleteTask(${index})"> <i class="fa-solid fa-trash-can text-[var(--pink-color)]"></i> </button>
             </div>
         `;
 
