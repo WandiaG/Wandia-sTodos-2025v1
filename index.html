@@ -82,6 +82,41 @@
                 e.preventDefault();
             }
         })
+    document.addEventListener('DOMContentLoaded', () => {
+    // Function to enter full-screen mode
+    function enterFullScreen() {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+    }
+
+    // Function to check if the document is in full-screen mode
+    function isFullScreen() {
+        return document.fullscreenElement ||
+               document.mozFullScreenElement ||
+               document.webkitFullscreenElement ||
+               document.msFullscreenElement;
+    }
+
+    // Monitor full-screen state
+    document.addEventListener('fullscreenchange', () => {
+        if (!isFullScreen()) {
+            enterFullScreen(); // Re-enter full-screen mode if it is exited
+        }
+    });
+
+    // Enter full-screen mode on page load
+    enterFullScreen();
+
+    // Your existing license verification and other code here...
+});
+
     </script>
 </body>
 </html>
